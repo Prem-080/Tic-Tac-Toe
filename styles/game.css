@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'poppins', sans-serif;
+    background: linear-gradient(to right, #D971F6, #7C52FF);
+}
+
+header{
+    text-align: center;
+}
+
+.hero {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 2em;
+    color: transparent;
+    -webkit-text-stroke: 0.5px white;
+    font-size: 3em;
+
+}
+
+.board {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+
+
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-family: 'roboto', sans-serif;
+    font-size: 2em;
+    color: #D971F6;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.cell:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    /* transform: scale(1.05); */
+    transition: all 0.3s ease;
+
+}
+
+.cell.win {
+    background-color: #D971F6;
+    color: transparent;
+    -webkit-text-stroke: 0.5px white;
+}
+
+.restart {
+    font-size: 1.5em;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #7C52FF;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+.restart.toggle_btn {
+    display: none;
+}
+
+.current {
+    font-size: 1.2em;
+    color: white;
+    margin-top: 10px;
+}
+
+
+.computer {
+    font-size: 1.5em;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #7C52FF;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.twoPlayer {
+    font-size: 1.5em;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #7C52FF;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button a {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.back_button {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #7C52FF;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}

@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'poppins', sans-serif;
+    background: linear-gradient(to right, #D971F6, #7C52FF);
+}
+
+.hero{
+    /* border: 1px solid; */
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+header{
+    width: 100%;
+    text-align: center;
+    padding: 20px 0 0 0;
+}
+
+h1 {
+    font-size: 2em;
+    color: transparent;
+    -webkit-text-stroke: 0.5px white;
+    font-size: 3em;
+
+}
+
+.computer{
+    font-size: 1.5em;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #7C52FF;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.twoPlayer{
+    font-size: 1.5em;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #7C52FF;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button a{
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+
