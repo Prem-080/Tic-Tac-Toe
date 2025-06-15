@@ -83,7 +83,7 @@ function startComputerMode() {
             cells[0].classList.add("o");
             cells[0].style.pointerEventsOff = "true";
         }
-        if (firstMove == 2 || firstMove == 6) {
+        else if (firstMove == 2 || firstMove == 6) {
             cells[4].innerText = "O";
             cells[4].classList.add("o");
             cells[4].style.pointerEventsOff = "true";
