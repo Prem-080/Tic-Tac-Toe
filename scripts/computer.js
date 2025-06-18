@@ -1,21 +1,32 @@
 function startComputerMode() {
     let board = document.getElementById("board");
+    let choices = document.querySelectorAll(".choices");
+    let choice = document.querySelector(".choice");
     let cells = document.querySelectorAll(".cell");
     let gameActive = true;
+    let computer = "O", user = "X";
 
+    choices.forEach(e => {
+        e.addEventListener("click", () => {
+            user = e.innerText;
+            computer = user == "X" ? "O" : "X";
+            choice.classList.toggle("toggle_btn");
+            board.classList.toggle("toggle_btn");
+            pointerEventsOff(choices);
+        })
+    });
 
     cells.forEach((cell) => {
         cell.addEventListener("click", () => {
             if (cell.innerText === "") {
-                cell.classList.add("x");
-                cell.innerText = "X"; // Player's move
+                cell.classList.add(`${user}`);
+                cell.innerText = `${user}`; // Player's move
                 cell.style.pointerEvents = "none"; // Disable further clicks
                 checkWin();
                 if (gameActive == true) {
                     computerMove();
                     checkWin();
                 }
-
             }
         });
     }
@@ -38,12 +49,11 @@ function startComputerMode() {
             return false;
         }
         for (const ind of availableSlots) {
-            gameState[ind] = "O";
-            if (checkWinner(gameState, "O")) {
-                cells[ind].innerText = "O";
-                cells[ind].classList.add("o");
+            gameState[ind] = computer;
+            if (checkWinner(gameState, computer)) {
+                cells[ind].innerText = `${computer}`;
+                cells[ind].classList.add(`${computer}`);
                 cells[ind].style.pointerEventsOff = "true";
-                console.log("O winning")
                 return;
             }
             else {
@@ -51,13 +61,12 @@ function startComputerMode() {
             }
         }
         for (const ind of availableSlots) {
-            gameState[ind] = "X";
-            if (checkWinner(gameState, "X")) {
-                gameState[ind] = "O";
-                cells[ind].innerText = "O";
-                cells[ind].classList.add("o");
+            gameState[ind] = user;
+            if (checkWinner(gameState, user)) {
+                gameState[ind] = `${computer}`;
+                cells[ind].innerText = `${computer}`;
+                cells[ind].classList.add(`${computer}`);
                 cells[ind].style.pointerEventsOff = "true";
-                console.log("X winning")
                 return;
             }
             else {
@@ -69,29 +78,29 @@ function startComputerMode() {
         if ((gameState.filter(cell => cell != "").length) == 1) {
             for (let index = 0; index < gameState.length; index++) {
                 const element = gameState[index];
-                if (element == "X") firstMove = index;
+                if (element == user) firstMove = index;
             }
         }
 
         if (firstMove == 0 || firstMove == 8) {
-            cells[4].innerText = "O";
-            cells[4].classList.add("o");
+            cells[4].innerText = `${computer}`;
+            cells[4].classList.add(`${computer}`);
             cells[4].style.pointerEventsOff = "true";
         }
         else if (firstMove == 4) {
-            cells[0].innerText = "O";
-            cells[0].classList.add("o");
+            cells[0].innerText = `${computer}`;
+            cells[0].classList.add(`${computer}`);
             cells[0].style.pointerEventsOff = "true";
         }
         else if (firstMove == 2 || firstMove == 6) {
-            cells[4].innerText = "O";
-            cells[4].classList.add("o");
+            cells[4].innerText = `${computer}`;
+            cells[4].classList.add(`${computer}`);
             cells[4].style.pointerEventsOff = "true";
         }
         else {
             let rand = Math.floor(Math.random() * (availableSlots.length - 0 + 1)) + 0;
-            cells[availableSlots[rand]].innerText = "O";
-            cells[availableSlots[rand]].classList.add("o");
+            cells[availableSlots[rand]].innerText = `${computer}`;
+            cells[availableSlots[rand]].classList.add(`${computer}`);
             cells[availableSlots[rand]].style.pointerEventsOff = "true";
         }
     }
@@ -114,26 +123,33 @@ function startComputerMode() {
                 cells[a].classList.add("win");
                 cells[b].classList.add("win");
                 cells[c].classList.add("win");
-                current.innerText = `${cells[a].innerText} wins!`;
+                if (cells[a].innerText == computer) {
+                    current.innerText = `AI wins!`;
+                }
+                if (cells[a].innerText == user) {
+                    current.innerText = `You win!`;
+                }
                 gameActive = false; // Set gameActive to false
-                pointerEventsOff(); // Disable further clicks
+                pointerEventsOff(cells); // Disable further clicks
+                toggleRestartButton(); // Show the restart button
                 return; // Exit the function after a win
             }
         }
 
         if (Array.from(cells).every(cell => cell.innerText !== "")) {
-            current.innerText = "It's a draw!";
+            current.innerText = "Draw!";
             gameActive = false; // Set gameActive to false
-            pointerEventsOff(); // Disable further clicks
+            pointerEventsOff(cells); // Disable further clicks
+            toggleRestartButton(); // Show the restart button
             return; // Exit the function after a draw
         }
     }
 
-    function pointerEventsOff() {
-        cells.forEach(cell => {
+    function pointerEventsOff(c) {
+        c.forEach(cell => {
             cell.style.pointerEvents = "none"; // Disable further clicks
         });
-        toggleRestartButton(); // Show the restart button
+
     }
 
     function resetGame() {
@@ -142,10 +158,17 @@ function startComputerMode() {
             cell.classList.remove("x", "o", "win");
             cell.style.pointerEvents = "auto"; // Re-enable clicks
         });
+        choices.forEach(c => {
+            c.style.pointerEvents = "auto";
+        })
+
+        choice.classList.toggle("toggle_btn");
+        board.classList.toggle("toggle_btn");
         currentPlayer = "X";
         gameActive = true;
         current.innerText = ``;
         toggleRestartButton(); // Hide the restart button
+
     }
 
     function toggleRestartButton() {
